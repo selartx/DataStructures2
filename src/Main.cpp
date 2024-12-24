@@ -1,26 +1,24 @@
 //buraya ui ekliyeyim bir de yapılacak işlemler falan çağırılsın
 #include "Bst.hpp"
+#include "Linkedlist.hpp"
 #include <iostream>
+#include <fstream>
+
 using namespace std;
 
 int main() {
-    // BST sınıfından bir ağaç oluştur
+	LinkedList linkedList; 
     BST agac;
+	ifstream file("agaclar.txt"); // Dosyayı açıyoruz
+    if (!file.is_open()) {
+        cerr << "Dosya açılamadı!" << endl;
+        return 1;
+    }
+	agac.agacolustur("PIBmug4wScx"); // Ağacı oluştur
+	agac.agaccizdir(); // Ağacı ekrana yazdır
+    cout << "Toplam değer: " << agac.agacdegeri(agac.kok,false) << endl;
 
-    // Ağaç oluşturma: Örnek veriyle ağacı inşa ediyoruz
-    string veri = "PmIugSwc4xB"; // Karışık karakterler (string ve int değeri gibi)
-    agac.agacolustur(veri);
 
-    // Ağaç çizdirme: Seviyelere göre ağaç çıktısını alıyoruz
-    cout << "Oluşturulan Ağacın Seviyelere Göre Çizimi:" << endl;
-    agac.agaccizdir();
-
-    // Eğer daha fazla test yapmak isterseniz, farklı veri setleriyle çalışabilirsiniz
-    cout << "\nBaşka bir veri setiyle ağacı yeniden oluşturup çizdiriyoruz:" << endl;
-    BST yeniAgac;
-    string yeniVeri = "AHz57kLd"; // Farklı bir veri seti
-    yeniAgac.agacolustur(yeniVeri);
-    yeniAgac.agaccizdir();
 
     return 0;
 }

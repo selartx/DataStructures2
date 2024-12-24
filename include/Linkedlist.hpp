@@ -22,6 +22,8 @@ class LinkedList
 	void AgacSil();
 	void ileri();
 	void geri();
+	void tablociz();
+
 
 };
 

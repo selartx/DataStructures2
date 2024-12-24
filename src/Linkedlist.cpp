@@ -1,4 +1,5 @@
 #include "Linkedlist.hpp"
+#include "Bst.hpp"
 #include <iostream>
 using namespace std;
 
@@ -73,5 +74,23 @@ void LinkedList::ileri() {
         current = current->sonraki; 
     } else {
         
+    }
+}
+void LinkedList::tablociz(){
+    cout << "Adres       | Toplam Değer | Sonraki Düğüm Adresi" << endl;
+    cout << "----------------------------------------------" << endl;
+    BST Agac;
+    while (head != nullptr) {
+        int treeValue = Agac.agacdegeri(head->Agac.kok,false); 
+        cout << head << " | " << treeValue << " | ";
+        
+        if (head->sonraki != nullptr) {
+            cout << head->sonraki;
+        } else {
+            cout << "NULL";
+        }
+        
+        cout << endl;
+        head = head->sonraki;  
     }
 }
