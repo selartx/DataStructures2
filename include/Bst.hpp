@@ -22,6 +22,7 @@ class BST
 	void agaccizdir();
 	void agaciDoldur(AgacDugum* node, char ekran[][100], int satir, int sol, int sag, int maxDerinlik);
 	int agacDerinligi(AgacDugum* dugum);
+	void aynalama(AgacDugum* dugum);
 	};
 	
 #endif

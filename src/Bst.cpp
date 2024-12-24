@@ -121,11 +121,12 @@ int BST::agacdegeri(AgacDugum* dugum, bool isLeftChild = false) {
     // Return the total sum including left, right, and current node values
     return solDeger + sagDeger + currentValue;
 }
-
-
-
-
-
+void BST::aynalama(AgacDugum* dugum) {
+    if (!dugum) return;
+    swap(dugum->sol, dugum->sag);
+    aynalama(dugum->sol);
+    aynalama(dugum->sag);
+}
 
 
 int BST::agacDerinligi(AgacDugum* dugum) {

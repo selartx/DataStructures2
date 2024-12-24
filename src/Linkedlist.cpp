@@ -1,6 +1,7 @@
 #include "Linkedlist.hpp"
 #include "Bst.hpp"
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 LinkedList::ListeDugum::ListeDugum(){
@@ -76,21 +77,83 @@ void LinkedList::ileri() {
         
     }
 }
-void LinkedList::tablociz(){
-    cout << "Adres       | Toplam Değer | Sonraki Düğüm Adresi" << endl;
-    cout << "----------------------------------------------" << endl;
-    BST Agac;
-    while (head != nullptr) {
-        int treeValue = Agac.agacdegeri(head->Agac.kok,false); 
-        cout << head << " | " << treeValue << " | ";
-        
-        if (head->sonraki != nullptr) {
-            cout << head->sonraki;
+void LinkedList::tablociz(int secilenIndex) {
+    ListeDugum *temp = head;
+    int count = 0;
+
+    // Genişlik ayarı (10 değer yan yana sığdırmak için)
+    const int alanGenisligi = 12;
+    const int boslukGenisligi = 1; // Düğümler arası boşluk
+    const int toplamDugum = 10;
+
+    // 1. Satır: Düğüm adreslerini yazdır
+    temp = head;
+    count = 0;
+    while (temp != nullptr && count < toplamDugum) {
+        cout << ". " << setw(alanGenisligi - 2) << temp << " .";
+        cout << string(boslukGenisligi, ' '); // Fazladan boşluk ekle
+        temp = temp->sonraki;
+        count++;
+    }
+    cout << endl;
+
+    // 2. Satır: Düğümlerdeki ağaç verilerini yazdır
+    temp = head;
+    count = 0;
+    while (temp != nullptr && count < toplamDugum) {
+        int agacDegeri = temp->Agac.agacdegeri(temp->Agac.kok, false);
+        cout << ". " << setw(alanGenisligi - 2) << agacDegeri << " .";
+        cout << string(boslukGenisligi, ' '); // Fazladan boşluk ekle
+        temp = temp->sonraki;
+        count++;
+    }
+    cout << endl;
+
+    // 3. Satır: Sonraki düğüm adreslerini yazdır
+    temp = head;
+    count = 0;
+    while (temp != nullptr && count < toplamDugum) {
+        if (temp->sonraki != nullptr) {
+            cout << ". " << setw(alanGenisligi - 2) << temp->sonraki << " .";
         } else {
-            cout << "NULL";
+            cout << ". " << setw(alanGenisligi - 2) << "NULL" << " .";
         }
-        
-        cout << endl;
-        head = head->sonraki;  
+        cout << string(boslukGenisligi, ' '); // Fazladan boşluk ekle
+        temp = temp->sonraki;
+        count++;
+    }
+    cout << endl;
+
+    // 4. Satır: Seçim göstergesi
+    temp = head;
+    count = 0;
+    while (count < toplamDugum) {
+        if (count == secilenIndex) {
+            cout << string(alanGenisligi - 2, '^') << " "; // Seçim göstergesi
+        } else {
+            cout << string(alanGenisligi - 2, ' ');
+        }
+        cout << string(boslukGenisligi, ' '); // Fazladan boşluk ekle
+        count++;
+    }
+    cout << endl;
+}
+void LinkedList::SeciliAgacCiz(int secilenIndex) {
+    ListeDugum* temp = head;
+    int count = 0;
+
+    // Seçilen index'e kadar ilerle
+    while (temp != nullptr && count < secilenIndex) {
+        temp = temp->sonraki;
+        count++;
+    }
+
+    // Geçerli düğüm varsa ağacı çiz
+    if (temp != nullptr) {
+        temp->Agac.agaccizdir(); // Mevcut agaccizdir fonksiyonunu çağır
+    } else {
+        cout << "Seçili düğüm bulunamadı." << endl;
     }
 }
+
+

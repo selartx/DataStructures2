@@ -22,8 +22,8 @@ class LinkedList
 	void AgacSil();
 	void ileri();
 	void geri();
-	void tablociz();
-
+	void tablociz(int secilenIndex);
+	void SeciliAgacCiz(int secilenIndex);
 
 };
 
