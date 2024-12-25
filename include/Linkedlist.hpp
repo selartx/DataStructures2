@@ -22,9 +22,10 @@ class LinkedList
 	void AgacSil();
 	void ileri();
 	void geri();
-	void tablociz(int secilenIndex);
+	void tablociz(int baslangicIndex, int maxGosterim, int secilenIndex);
 	void SeciliAgacCiz(int secilenIndex);
-
+	void SeciliAgaciAynaYap(int secilenIndex);
+	int DugumSayisi();
 };
 
 #endif

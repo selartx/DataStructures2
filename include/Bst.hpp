@@ -20,7 +20,7 @@ class BST
 	void agacolustur(const string &veri);
 	int agacdegeri(AgacDugum* dugum, bool isLeftChild) ;
 	void agaccizdir();
-	void agaciDoldur(AgacDugum* node, char ekran[][100], int satir, int sol, int sag, int maxDerinlik);
+	void agaciDoldur(AgacDugum* node, char ekran[][150], int satir, int sol, int sag, int maxDerinlik);
 	int agacDerinligi(AgacDugum* dugum);
 	void aynalama(AgacDugum* dugum);
 	};

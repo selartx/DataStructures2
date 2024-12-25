@@ -63,8 +63,8 @@ void BST::agaccizdir() {
     int derinlik = agacDerinligi(kok);
 
     // Çizim için kullanılacak sabit boyutlu bir dizi
-    const int genislik = 100; // Daha geniş bir değer Windows PowerShell tam ekranına uygun
-    const int yukseklik = 40; // Derinlik seviyesini artır
+    const int genislik = 150; // Daha geniş bir değer Windows PowerShell tam ekranına uygun
+    const int yukseklik = 80; // Derinlik seviyesini artır
     char ekran[yukseklik][genislik];
 
     // Diziyi boşluk karakterleri ile doldur
@@ -86,28 +86,33 @@ void BST::agaccizdir() {
     }
 }
 
-void BST::agaciDoldur(AgacDugum* node, char ekran[][100], int satir, int sol, int sag, int maxDerinlik) {
+void BST::agaciDoldur(AgacDugum* node, char ekran[][150], int satir, int sol, int sag, int maxDerinlik) {
     if (!node || satir / 2 > maxDerinlik) return;
 
+    // Calculate the horizontal position for the current node
     int orta = (sol + sag) / 2;
-    ekran[satir][orta] = node->veri; // Düğüm verisini yerleştir
+    ekran[satir][orta] = node->veri; // Place the node's value
 
-    // Bağlantı çizgilerini ekle
+    // Handle left subtree
     if (node->sol) {
         int solOrta = (sol + orta) / 2;
-        for (int i = orta - 1; i > solOrta; i--) {
-            ekran[satir + 1][i] = '.';
+        for (int i = orta - 1; i >= solOrta; i--) {
+            ekran[satir + 1][i] = '.'; // Draw connecting dots
         }
-        agaciDoldur(node->sol, ekran, satir + 2, sol, orta - 1, maxDerinlik);
+        agaciDoldur(node->sol, ekran, satir + 2, sol, orta - 3, maxDerinlik); // Ensure spacing
     }
+
+    // Handle right subtree
     if (node->sag) {
         int sagOrta = (orta + sag) / 2;
-        for (int i = orta + 1; i < sagOrta; i++) {
-            ekran[satir + 1][i] = '.';
+        for (int i = orta + 1; i <= sagOrta; i++) {
+            ekran[satir + 1][i] = '.'; // Draw connecting dots
         }
-        agaciDoldur(node->sag, ekran, satir + 2, orta + 1, sag, maxDerinlik);
+        agaciDoldur(node->sag, ekran, satir + 2, orta + 3, sag, maxDerinlik); // Ensure spacing
     }
 }
+
+
 int BST::agacdegeri(AgacDugum* dugum, bool isLeftChild = false) {
     if (!dugum) return 0;
 
@@ -122,11 +127,12 @@ int BST::agacdegeri(AgacDugum* dugum, bool isLeftChild = false) {
     return solDeger + sagDeger + currentValue;
 }
 void BST::aynalama(AgacDugum* dugum) {
-    if (!dugum) return;
-    swap(dugum->sol, dugum->sag);
-    aynalama(dugum->sol);
-    aynalama(dugum->sag);
+    if (!dugum) return; // Eğer düğüm boşsa işlemi durdur
+    swap(dugum->sol, dugum->sag); // Sol ve sağ çocukları yer değiştir
+    aynalama(dugum->sol);         // Sol alt ağacı aynala
+    aynalama(dugum->sag);         // Sağ alt ağacı aynala
 }
+
 
 
 int BST::agacDerinligi(AgacDugum* dugum) {
